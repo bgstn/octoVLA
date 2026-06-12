@@ -1,0 +1,30 @@
+{
+  "name": "Octo",
+  "dockerFile": "../docker/Dockerfile",
+  "context": "..",
+  "runArgs": [
+    "--gpus=all",
+    "--ipc=host"
+  ],
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/octo,type=bind,consistency=cached"
+  ],
+  "workspaceFolder": "/octo",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "anthropics.claude-code"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python",
+        "python.formatting.provider": "none",
+        "editor.formatOnSave": false
+      }
+    }
+  },
+  "postCreateCommand": "pip install -e .[dev] 2>/dev/null || true",
+  "remoteUser": "root"
+}
